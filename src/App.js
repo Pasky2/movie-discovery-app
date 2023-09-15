@@ -15,7 +15,6 @@ import Footer from "./components/Footer";
 
 const API_KEY = "068ccc0956857d96f88cfe7582410c05";
 const BASE_URL = "https://api.themoviedb.org/3";
-// const API_URL  = 'https://api.themoviedb.org/3/movie/top_rated?api_key=068ccc0956857d96f88cfe7582410c05&language=en-US&page=1'
 
 function App() {
   const [topMovies, setTopMovies] = useState([]);
@@ -70,6 +69,7 @@ function App() {
             setLoading={setLoading}
             topMovies={topMovies}
             fetchMovies={fetchMovies}
+            setTopMovies={setTopMovies}
           />
           <div className="text-white mt-5 text-start mx-5 px-5">
             <h4>John Wick 3:</h4>
@@ -86,18 +86,6 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            {/* <div className='container'>
-              <div className='row'>
-                <div className='col-8 col-lg-3 m-4'>
-                
-                { topMovies
-                .map( (movie) => (
-                <Movies movie = { movie } />
-              ))}
-                </div>
-              </div>
-              
-            </div> */}
             <div className="container mt-5">
               <div className="featured-movies">
                 <h4>Featured Movies</h4>
@@ -108,12 +96,12 @@ function App() {
             </div>
             {loading && (
               <div className="container m-auto text-center">
-                <h1>Loading...</h1>
+                <h4>Loading...</h4>
               </div>
             )}
 
             <div className="movie-grid container">
-              {topMovies ? (
+              {topMovies?.length > 0 ? (
                 topMovies.map((movie, id) => (
                   <div className="shadow rounded-4 movie-card" key={movie.id}>
                     <Link to={`/movies/${movie.id}`}>
@@ -165,9 +153,7 @@ function MovieDetails() {
     axios
       .get(`${BASE_URL}/movie/${movie}?api_key=${API_KEY}&language=en-US`)
       .then((response) => {
-        console.log(response);
         setMovie(response.data);
-        console.log(movie);
       })
       .catch((error) => {
         console.error("Error fetching movie details:", error);

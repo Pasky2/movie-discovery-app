@@ -115,3 +115,15 @@ button {
   text-align: center;
   margin-top: 20px;
 }
+
+@media only screen and (max-width: 992px) {
+  .movie-grid {
+    display: block;
+    gap: 20px;
+    
+  }
+
+  .movie-card {
+    margin: 20px;
+  }
+}
