@@ -101,8 +101,9 @@ function App() {
             )}
 
             <div className="movie-grid container">
-              {topMovies?.length > 0 ? (
-                topMovies.map((movie, id) => (
+              {
+              topMovies?.length > 0 ? (
+                topMovies.slice(0, 10).map((movie, id) => (
                   <div className="shadow rounded-4 movie-card" key={movie.id}>
                     <Link to={`/movies/${movie.id}`}>
                       <img
