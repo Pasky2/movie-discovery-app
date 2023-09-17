@@ -2,3 +2,7 @@
     color: grey;
 }
 
+.search-btn {
+    margin-left: -25px;
+    cursor: pointer;
+}

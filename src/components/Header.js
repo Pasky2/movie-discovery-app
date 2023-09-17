@@ -41,7 +41,7 @@ const Search = ({searchQuery, setSearchQuery, setSearchResults, searchResults, s
             />{' '}
           </Navbar.Brand>
           
-        <Form inline>
+        <Form inline className='d-flex align-items-center'>
       
           <input
           style={{width: '100%', outline: 'none', padding:'5px 20px'}}
@@ -50,9 +50,8 @@ const Search = ({searchQuery, setSearchQuery, setSearchResults, searchResults, s
             type='text'
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-           onKeyUp={handleSearch}
           />
-          {/* <InputGroup.Text id="basic-addon1" onClick={handleSearch}><button className='btn '>Send</button></InputGroup.Text> */}
+          <i className="bi bi-search search-btn" onClick={handleSearch}></i>
       </Form>
 
       <a href='/' className='text-white text-decoration-none'>Sign in</a>
