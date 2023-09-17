@@ -4,6 +4,7 @@ import {
   Route,
   Switch,
   Link,
+  useParams
   
 } from "react-router-dom";
 import axios from "axios";
@@ -136,7 +137,7 @@ function App() {
             </div>
           </Route>
           <Route path="/movies/:id">
-            <MovieDetails />
+            <MovieDetails  />
           </Route>
         </Switch>
 
@@ -147,19 +148,19 @@ function App() {
 }
 
 function MovieDetails() {
-  // const { id } = useParams();
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/movie/${movie}?api_key=${API_KEY}&language=en-US`)
+      .get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`)
       .then((response) => {
         setMovie(response.data);
       })
       .catch((error) => {
         console.error("Error fetching movie details:", error);
       });
-  }, [movie]);
+  }, [id]);
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -167,6 +168,7 @@ function MovieDetails() {
 
   return (
     <div className="movie-details">
+      <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt={movie.title} className="img-fluid" />
       <h2 data-testid="movie-title">{movie.title}</h2>
       <p data-testid="movie-release-date">Release Date: {movie.release_date}</p>
       <p data-testid="movie-runtime">Runtime: {movie.runtime} minutes</p>
